@@ -1,9 +1,9 @@
-const traverseTree = require("./traverseTree");
+var traverseTree = require("./traverseTree");
 
-const noop = () => {};
+var noop = function() {};
 
-const oneToOneCloneNode = (node, parent) => {
-  const nodeCopy = {
+var oneToOneCloneNode = function(node, parent) {
+  var nodeCopy = {
     name: node.name,
     children: []
   };
@@ -15,17 +15,22 @@ const oneToOneCloneNode = (node, parent) => {
   return nodeCopy;
 };
 
-const cloneTree = (node, cloneNode = oneToOneCloneNode) => {
-  const nodeCopy = cloneNode(node);
+var cloneTree = function(node, cloneNode) {
+  cloneNode = cloneNode || oneToOneCloneNode;
+  var nodeCopy = cloneNode(node);
 
   traverseTree(
     { original: node, copy: nodeCopy },
     noop,
-    ({ original: { children = [] } }) => children,
-    ({ copy }, child, index) => ({
-      original: child,
-      copy: cloneNode(child, copy, index)
-    })
+    function(node) {
+      return node.original.children || [];
+    },
+    function(node, child, index) {
+      return {
+        original: child,
+        copy: cloneNode(child, node.copy, index)
+      };
+    }
   );
 
   return nodeCopy;

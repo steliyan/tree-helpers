@@ -1,7 +1,5 @@
-const cloneTree = require("./cloneTree");
-const traverseTree = require("./traverseTree");
+var cloneTree = require("./cloneTree");
+var traverseTree = require("./traverseTree");
 
-module.exports = {
-  cloneTree,
-  traverseTree
-};
+module.exports.cloneTree = cloneTree;
+module.exports.traverseTree = traverseTree;

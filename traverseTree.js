@@ -1,12 +1,12 @@
-const traverseTree = (rootNode, func, getChildren, createNode) => {
-  const stack = [rootNode];
+var traverseTree = function(rootNode, func, getChildren, createNode) {
+  var stack = [rootNode];
   while (stack.length) {
-    const node = stack.pop();
+    var node = stack.pop();
     func(node);
 
-    getChildren(node).forEach((c, index) =>
-      stack.push(createNode(node, c, index))
-    );
+    getChildren(node).forEach(function(c, index) {
+      stack.push(createNode(node, c, index));
+    });
   }
 };
 
